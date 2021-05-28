@@ -24,3 +24,7 @@ jobs:
         uses: actions/checkout@master
         with:
           repository: hashicorp/go-tfe
+
+      - name: List files in the repository
+        run: |
+          ls ${{ github.workspace }}
