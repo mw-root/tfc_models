@@ -19,11 +19,14 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+        with:
+          path: main
 
       - name: Check hashicorp/go-tfe
         uses: actions/checkout@master
         with:
           repository: hashicorp/go-tfe
+          path: go-tfe
 
       - name: List files in the repository
         run: |
