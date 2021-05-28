@@ -1,6 +1,4 @@
-# This is a basic workflow to help you get started with Actions
-
-name: CI
+name: TFE-JSONschema
 
 on:
   workflow_dispatch:
@@ -8,26 +6,28 @@ on:
   #  - cron:  '0 10 * * *'
 
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-        with:
-          path: main
+      #  with:
+      #    path: main
 
-      - name: Check hashicorp/go-tfe
-        uses: actions/checkout@master
+      #- name: Check hashicorp/go-tfe
+      #  uses: actions/checkout@master
+      #  with:
+      #    repository: hashicorp/go-tfe
+      #    path: go-tfe
+      - uses: actions/setup-go@v2
         with:
-          repository: hashicorp/go-tfe
-          path: go-tfe
+          go-version: '^1.15.4'
 
+      - name: Run
+        run: |
+          go run main
+          
       - name: List files in the repository
         run: |
           ls ${{ github.workspace }}
